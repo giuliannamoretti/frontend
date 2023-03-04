@@ -1,0 +1,21 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "eslint --ext .js",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "vite": "^3.0.9"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "jquery": "^3.6.1",
+    "ol": "latest",
+    "ol-popup": "^5.0.0"
+  }
+}

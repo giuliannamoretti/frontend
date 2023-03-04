@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Trabalho de Conclusão de Curso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="node_modules/ol/ol.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+</head>
+
+<body>
+
+  <div class="w3-bar w3-white we-wide w3-padding w3-card">
+    <a href="#home" class="w3-bar-item w3-button " style="font-family: Helvetica; font-size: 20px;">Focos de Queimadas e
+      Dados Climatológicos em Terras Indígenas de Mato Grosso</a>
+    <div class="w3-right w3-hide-small">
+      <a href="http://127.0.0.1:5173/#mapa" class="w3-bar-item w3-button"
+        style="font-family: Helvetica; font-size: 17px;">Mapa</a>
+      <a href="http://127.0.0.1:5173/#tabela" class="w3-bar-item w3-button"
+        style="font-family: Helvetica; font-size: 17px;">Tabela Climatológica</a>
+    </div>
+  </div>
+  <div class="w3-container w3-padding-32" id="contact">
+    <h3 class="w3-border-bottom w3-border-light-grey" style="font-family: Helvetica;" id="mapa">Mapa de Mato Grosso</h3>
+    <div class="w3-container" id="select">
+      <i>Clique no botão abaixo para selecionar um ano.</i>
+      <br>
+      <br>
+      <button class="w3-card w3-wide w3-bar-item w3-white" id="myBtn" style="font-family: Helvetica;">Selecione um
+        ano:</button>
+
+    </div>
+    <div class="form-group w3-container" id="checkbox">
+      <fieldset data-role="controlgroup" data-type="horizontal">
+
+        <input type="checkbox" class="custom-control-input" id="customCheck1" name="year1">
+        <label class="custom-control-label" for="customCheck1" style="font-family: Helvetica;">2012</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck2" name="year2">
+        <label class="custom-control-label" for="customCheck2" style="font-family: Helvetica;">2013</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck3" name="year3">
+        <label class="custom-control-label" for="customCheck3" style="font-family: Helvetica;">2014</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck4" name="year4">
+        <label class="custom-control-label" for="customCheck4" style="font-family: Helvetica;">2015</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck5" name="year5">
+        <label class="custom-control-label" for="customCheck5" style="font-family: Helvetica;">2016</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck6" name="year6">
+        <label class="custom-control-label" for="customCheck6" style="font-family: Helvetica;">2017</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck7" name="year7">
+        <label class="custom-control-label" for="customCheck7" style="font-family: Helvetica;">2018</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck8" name="year8">
+        <label class="custom-control-label" for="customCheck8" style="font-family: Helvetica;">2019</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck9" name="year9">
+        <label class="custom-control-label" for="customCheck9" style="font-family: Helvetica;">2020</label>
+
+        <input type="checkbox" class="custom-control-input" id="customCheck10" name="year10">
+        <label class="custom-control-label" for="customCheck10" style="font-family: Helvetica;">2021</label>
+
+      </fieldset>
+    </div>
+    <div class="w3-container">
+      <br>
+      <i>Clique na região demarcada para selecionar uma Terra Indígena.</i>
+    </div>
+
+    
+    <div class="w3-container w3-padding-16">
+      <div id="map" class="map"></div>
+      <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+      </div>
+      <footer style="text-align: end; font-size: 10px;">Dados: Terras Indígenas (https://www.gov.br/funai/pt-br/atuacao/terras-indigenas/geoprocessamento-e-mapas); Queimadas(https://queimadas.dgi.inpe.br/queimadas/bdqueimadas#mapa
+)      </footer>
+    </div>
+    
+
+  </div>
+
+  <div class="w3-container">
+    <h3 class="w3-border-bottom w3-border-light-grey" style="font-family: Helvetica;" id="tabela">Tabela Climatológica
+    </h3>
+    <p style="font-family: Helvetica; margin: 10px;">Escolha a estação metereorológica mais próxima do pico de incêndio e a data do
+      mesmo:</p>
+  </div>
+  <div class="w3-container w3-padding-16" id="contact" style="display: flex; gap: 5px">
+    <select id="selected-station" style="width: 150px; height: 28.5">
+      <option value="">Estação</option>
+      <option value="aguaboa">Água Boa</option>
+      <option value="apiacas">Apiacás</option>
+      <option value="brasnorte">Brasnorte</option>
+      <option value="camponovodosparecis">Campo Novo dos Parecis</option>
+      <option value="comodoro">Comodoro</option>
+      <option value="cotriguacu">Cotriguaçu</option>
+      <option value="gauchadonorte">Gaúcha do Norte</option>
+      <option value="guarantadonorte">Guarantã do Norte</option>
+      <option value="juara">Juara</option>
+      <option value="juina">Juína</option>
+      <option value="paranatinga">Paranatinga</option>
+      <option value="ponteselacerda">Pontes e Lacerda</option>
+      <option value="portoestrela">Porto Estrela</option>
+      <option value="querencia">Querência</option>
+      <option value="rondonopolis">Rondonópolis</option>
+      <option value="santoantoniodoleste">Santo Antônio do Leste</option>
+      <option value="saofelixdoaraguaia">São Felix do Araguaia</option>
+      <option value="tangaradaserra">Tangará da Serra</option>
+    </select>
+
+    <input id="date" type="date" min="2012-01-01"
+    max="2021-12-31" >
+    <button class="w3-card w3-wide w3-bar-item w3-white" style="align-items: end"
+      onclick="fetchWeather(this.selectedIndex)">Procurar</button>
+  </div>
+
+
+
+  <div class="w3-container w3-padding-16">
+    <table id="table-weathers">
+      <thead>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Precipitação Total (mm)</th>
+        <th>Temperatura máxima na hora anterior (°C)</th>
+        <th>Temperatura mínima na hora anterior (°C)</th>
+        <th>Umidade relativa máxima na hora anterior (%)</th>
+        <th>Umidade relativa mínima na hora anterior (%)</th>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <footer style="text-align: end; font-size: 10px;">Dados: Dados Climatológicos(https://portal.inmet.gov.br/dadoshistoricos)</footer>
+  </div>
+  <button onclick="topFunction()" id="meuBotao" title="Vá para o topo">Topo</button>
+
+  <script src="node_modules/ol/dist/ol.js"></script>
+  <script type="module" src="main.js"></script>
+  <script type="text/javascript" src="./function.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
+</body>
+
+</html>
