@@ -148,24 +148,6 @@ const map = new Map({
   }),
 });
 
-map.on('singleclick', function (evt) {
-  content.innerHTML = '';
-
-  const resolution = map.getView().getResolution();
-
-  const url = terras.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-    'INFO_FORMAT': 'application/json',
-    'propertyname': 'terrai_nom,etnia_nome,municipio_'
-  });
-  if (url) {
-    $.getJSON(url, function (data) {
-      const feature = data.features[0];
-      const props = feature.properties;
-      content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio_.toUpperCase() + "</h6> <br> <h5> Terra: </h5> <h6>" + props.terrai_nom.toUpperCase() + "</h6> <br> <h5> Etnia: </h5> <h6>" + props.etnia_nome.toUpperCase() + "</h6>";
-      overlay.setPosition(evt.coordinate);
-    })
-  }
-});
 // Get the button:
 let mybutton = document.getElementById("meuBotao");
 
@@ -205,35 +187,8 @@ $('#customCheck1').on('change', function () {
       document.getElementById("customCheck" + i).disabled = true;
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2012')) {
-        return;
-      }
-
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2012.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
     map.removeLayer(picos_2012);
     for (var i = 2; i <= 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -258,33 +213,9 @@ $('#customCheck2').on('change', function () {
       }
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2013')) return;
 
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2013.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
     map.removeLayer(picos_2013);
     for (var i = 3; i <= 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -310,33 +241,10 @@ $('#customCheck3').on('change', function () {
       }
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2014')) return;
 
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2014.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora,diasemchuv'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6> <br> <h5> Dias sem chuva: </h5> <h6>" + props.diasemchuv + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
+
     map.removeLayer(picos_2014);
     for (var i = 4; i <= 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -362,33 +270,10 @@ $('#customCheck4').on('change', function () {
       }
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2015')) return;
 
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2015.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora,diasemchuv'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6> <br> <h5> Dias sem chuva: </h5> <h6>" + props.diasemchuv + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
+
     map.removeLayer(picos_2015);
     for (var i = 5; i <= 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -414,33 +299,9 @@ $('#customCheck5').on('change', function () {
       }
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2016')) return;
-
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2016.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora,diasemchuv'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6> <br> <h5> Dias sem chuva: </h5> <h6>" + props.diasemchuv + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
+
     map.removeLayer(picos_2016);
     for (var i = 6; i <= 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -466,33 +327,10 @@ $('#customCheck6').on('change', function () {
       }
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2017')) return;
 
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2017.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora,diasemchuv'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6> <br> <h5> Dias sem chuva: </h5> <h6>" + props.diasemchuv + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
+
     map.removeLayer(picos_2017);
     for (var i = 7; i <= 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -518,33 +356,9 @@ $('#customCheck7').on('change', function () {
       }
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2018')) return;
-
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2018.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora,diasemchuv'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6> <br> <h5> Dias sem chuva: </h5> <h6>" + props.diasemchuv + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
+
     map.removeLayer(picos_2018);
     for (var i = 8; i <= 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -570,33 +384,9 @@ $('#customCheck8').on('change', function () {
       }
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2019')) return;
-
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2019.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora,diasemchuv'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6> <br> <h5> Dias sem chuva: </h5> <h6>" + props.diasemchuv + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
+
     map.removeLayer(picos_2019);
     for (var i = 9; i <= 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -622,33 +412,9 @@ $('#customCheck9').on('change', function () {
       }
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2020')) return;
 
-      content.innerHTML = '';
-
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2020.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora,diasemchuv'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6> <br> <h5> Dias sem chuva: </h5> <h6>" + props.diasemchuv + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
 
     map.removeLayer(picos_2020);
     for (var i = 10; i <= 10; i++) {
@@ -676,32 +442,9 @@ $('#customCheck10').on('change', function () {
       document.getElementById("customCheck" + i).disabled = true;
     }
 
-    map.on('singleclick', function (evt) {
-      if (!!!currentYear.includes('2021')) return;
-
-      content.innerHTML = '';
-      const resolution = map.getView().getResolution();
-
-      const url = picos_2021.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
-        'INFO_FORMAT': 'application/json',
-        'propertyname': 'municipio,bioma,datahora,diasemchuv'
-      });
-
-      if (url) {
-        $.getJSON(url, function (data) {
-
-          const feature = data.features[0];
-          const props = feature.properties;
-          content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
-            props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6> <br> <h5> Dias sem chuva: </h5> <h6>" + props.diasemchuv + "</h6>";
-          overlay.setPosition(evt.coordinate);
-
-        })
-      } else {
-        overlay.setPosition(undefined);
-      }
-    });
   } else {
+    currentYear = null;
+
     map.removeLayer(picos_2021);
     for (var i = 1; i < 10; i++) {
       document.getElementById("customCheck" + i).disabled = false;
@@ -714,6 +457,127 @@ let mousePosition = new MousePosition({
   projection: 'EPSG:4674',
   coordinateFormat: function (coordinate) { return format(coordinate, '{y} , {x}', 4); }
 });
+
+
+map.on('singleclick', function (evt) {
+  content.innerHTML = '';
+
+  const resolution = map.getView().getResolution();
+  let url;
+  let eTerraIndigena = false;
+  switch (currentYear) {
+    case '2012':
+      url = picos_2012.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2013':
+
+      url = picos_2013.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2014':
+
+      url = picos_2014.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2015':
+
+      url = picos_2015.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2016':
+
+      url = picos_2016.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2017':
+
+      url = picos_2017.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2018':
+
+      url = picos_2018.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2019':
+
+      url = picos_2019.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2020':
+
+      url = picos_2020.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    case '2021':
+
+      url = picos_2021.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'municipio,bioma,datahora'
+      });
+
+      break;
+    default:
+      url = terras.getSource().getFeatureInfoUrl(evt.coordinate, resolution, 'EPSG:3857', {
+        'INFO_FORMAT': 'application/json',
+        'propertyname': 'terrai_nom,etnia_nome,municipio_'
+      });
+
+      eTerraIndigena = true;
+      break;
+  }
+
+
+  if (url) {
+    $.getJSON(url, function (data) {
+
+      const feature = data.features[0];
+      const props = feature.properties;
+
+      if (eTerraIndigena === true) {
+        content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio_.toUpperCase() + "</h6> <br> <h5> Terra: </h5> <h6>" + props.terrai_nom.toUpperCase() + "</h6> <br> <h5> Etnia: </h5> <h6>" + props.etnia_nome.toUpperCase() + "</h6>";
+        overlay.setPosition(evt.coordinate);
+      } else {
+        content.innerHTML = "<h5> Municipio: </h5> <h6>" + props.municipio.toUpperCase() + "</h6> <br> <h5> Bioma: </h5> <h6>" +
+          props.bioma.toUpperCase() + "</h6> <br> <h5> Data e hora: </h5> <h6>" + props.datahora.toUpperCase() + "</h6>";
+      }
+
+      overlay.setPosition(evt.coordinate);
+
+    })
+  } else {
+    overlay.setPosition(undefined);
+  }
+});
+
 map.addControl(mousePosition);
 
 let scaleControl = new ScaleLine({
