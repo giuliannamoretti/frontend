@@ -13,7 +13,6 @@
     "vite": "^3.0.9"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
     "jquery": "^3.6.1",
     "ol": "latest",
     "ol-popup": "^5.0.0"
