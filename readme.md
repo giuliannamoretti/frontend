@@ -9,6 +9,8 @@ Tecnologias usadas:
     • Geoserver
     • OpenLayers
     • Node.js
+    
+O backend pode ser encontrado em: https://github.com/giuliannamoretti/backend
 
 # OpenLayers + Vite
 
